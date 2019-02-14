@@ -70,8 +70,8 @@ dependencies:
   cf_stacks:
   - cflinuxfs2
   - cflinuxfs3
-  uri: https://files.pythonhosted.org/packages/2b/26/07472b0de91851b6656cbc86e2f0d5d3a3128e7580f23295ef58b6862d6c/numpy-1.16.1.zip
-  sha256: 31d3fe5b673e99d33d70cfee2ea8fe8dccd60f265c3ed990873a88647e3dd288
+  uri: https://github.com/numpy/numpy/releases/download/v1.16.1/numpy-1.16.1.tar.gz
+  sha256: 748369f4d5f60caf93e1d86cb22ad7fc5f82693f18804638f22bc55df27792ec
 - name: pipenv
   version: 2018.11.26
   uri: https://buildpacks.cloudfoundry.org/dependencies/pipenv/pipenv-v2018.11.26-cflinuxfs2-eeaa1c70.tgz
