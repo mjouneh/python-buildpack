@@ -106,7 +106,7 @@ func RunPython(s *Supplier) error {
 		return err
 	}
 
-        if err := s.InstallwNumPy(); err != nil {
+        if err := s.InstallNumPy(); err != nil {
                 s.Log.Error("Could not install numpy: %v", err)
                 return err
         }
