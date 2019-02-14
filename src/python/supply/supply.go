@@ -344,10 +344,9 @@ func (s *Supplier) InstallNumPy() error {
                 return err
         }
 
-        if output, err := s.Command.Execute(s.Stager.BuildDir(), ioutil.Discard, ioutil.Discard, "python", "-m", "pip", "install", "numpy", "--exists-action=w", "--no-index", fmt.Sprintf("--find-links=%s", tempPath)); err != nil {
+        if err := s.Command.Execute(s.Stager.BuildDir(), ioutil.Discard, ioutil.Discard, "python", "-m", "pip", "install", "numpy", "--exists-action=w", "--no-index", fmt.Sprintf("--find-links=%s", tempPath)); err != nil {
         	s.Log.Debug("******Path val: %s", os.Getenv("PATH"))
 		s.Log.Debug("[Error]: ", err)
-		s.Log.Debug("[Error]: ", output)
                 return err
         }
 
