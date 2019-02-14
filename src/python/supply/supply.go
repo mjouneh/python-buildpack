@@ -339,7 +339,7 @@ func (s *Supplier) InstallPipPop() error {
 
 func (s *Supplier) InstallNumPy() error {
 	tempPath := filepath.Join("/tmp", "numpy")
-        if err := s.Command.Execute(s.Stager.BuildDir(), ioutil.Discard, ioutil.Discard, "python", "-m", "pip", "install", "numpy scipy matplotlib", "--exists-action=w", "--no-index", fmt.Sprintf("--find-links=%s", tempPath)); err != nil {
+        if err := s.Command.Execute(s.Stager.BuildDir(), io.Writer, io.Writer, "python", "-m", "pip", "install", "numpy scipy matplotlib", "--exists-action=w", "--no-index", fmt.Sprintf("--find-links=%s", tempPath)); err != nil {
         	s.Log.Debug("******Path val: %s", os.Getenv("PATH"))
 		s.Log.Debug("[Numpy Installation Error]: ", err)
                 return err
