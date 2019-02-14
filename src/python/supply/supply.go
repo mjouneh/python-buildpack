@@ -338,18 +338,9 @@ func (s *Supplier) InstallPipPop() error {
 }
 
 func (s *Supplier) InstallNumPy() error {
-        tempPath := filepath.Join("/tmp", "numpy scipy matplotlib")
-        if err := s.Installer.InstallOnlyVersion("numpy", tempPath); err != nil {
-		s.Log.Debug("[Error]: ", err)
-                return err
-        } else {
-		s.Log.Debug("Not using packages defined on this buildpack")
-		return nil
-	}
-
         if err := s.Command.Execute(s.Stager.BuildDir(), ioutil.Discard, ioutil.Discard, "python", "-m", "pip", "install", "numpy scipy matplotlib", "--exists-action=w", "--no-index", fmt.Sprintf("--find-links=%s", tempPath)); err != nil {
         	s.Log.Debug("******Path val: %s", os.Getenv("PATH"))
-		s.Log.Debug("[Error]: ", err)
+		s.Log.Debug("[Numpy Installation Error]: ", err)
                 return err
         }
 
