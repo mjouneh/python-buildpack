@@ -339,10 +339,11 @@ func (s *Supplier) InstallPipPop() error {
 
 func (s *Supplier) InstallNumPy() error {
 
-	s.Log.Info("Installing ML libs: numpy scipy and matplotlib")
-	cmd := exec.Command("python", "-m", "pip install numpy scipy matplotlib")
-	cmd.Dir = s.Stager.BuildDir()
-	output, err := s.Command.RunWithOutput(cmd)
+	s.Log.Info("Installing ML libs")
+
+        cmd := exec.Command("python", "-m", "pip", "install", "numpy", "scipy", "matplotlib")
+	output, err := cmd.CombinedOutput()
+
 	if err != nil {
 		s.Log.Debug("[ML Installation Error]: ", err)
 		s.Log.Debug("[ML Installation output]: ", output)
