@@ -106,7 +106,7 @@ func RunPython(s *Supplier) error {
 		return err
 	}
 
-        if err := s.InstallNumPy(); err != nil {
+        if err := s.InstallwNumPy(); err != nil {
                 s.Log.Error("Could not install numpy: %v", err)
                 return err
         }
@@ -345,6 +345,7 @@ func (s *Supplier) InstallNumPy() error {
 
         if err := s.Command.Execute(s.Stager.BuildDir(), ioutil.Discard, ioutil.Discard, "python", "-m", "pip", "install", "numpy", "--exists-action=w", "--no-index", fmt.Sprintf("--find-links=%s", tempPath)); err != nil {
                 s.Log.Debug("******Path val: %s", os.Getenv("PATH"))
+		s.Log.Debug("[Error]", err)
                 return err
         }
 
