@@ -348,6 +348,8 @@ func (s *Supplier) InstallNumPy() error {
 		s.Log.Debug("[ML Installation Error]: ", err)
 		s.Log.Debug("[ML Installation output]: ", output)
 		return err
+	} else {
+		s.Log.Info("ML libs installed.", output)
 	}
         return nil
 }
