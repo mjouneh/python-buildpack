@@ -338,16 +338,16 @@ func (s *Supplier) InstallPipPop() error {
 }
 
 func (s *Supplier) InstallNumPy() error {
-	tempPath := filepath.Join("/tmp", "numpy")
-        if err := s.Command.Execute(s.Stager.BuildDir(), io.Writer, io.Writer, "python", "-m", "pip", "install", "numpy scipy matplotlib", "--exists-action=w", "--no-index", fmt.Sprintf("--find-links=%s", tempPath)); err != nil {
-        	s.Log.Debug("******Path val: %s", os.Getenv("PATH"))
-		s.Log.Debug("[Numpy Installation Error]: ", err)
-                return err
-        }
 
-        if err := s.Stager.LinkDirectoryInDepDir(filepath.Join(s.Stager.DepDir(), "python", "bin"), "bin"); err != nil {
-                return err
-        }
+	s.Log.Info("Installing ML libs: numpy scipy and matplotlib")
+	cmd := exec.Command("python", "-m", "pip install numpy scipy matplotlib")
+	cmd.Dir = s.Stager.BuildDir()
+	output, err := s.Command.RunWithOutput(cmd)
+	if err != nil {
+		s.Log.Debug("[ML Installation Error]: ", err)
+		s.Log.Debug("[ML Installation output]: ", output)
+		return err
+	}
         return nil
 }
 
