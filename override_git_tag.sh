@@ -6,6 +6,9 @@ git commit
 
 git push
 
+#delete local tag
+git tag -d v1.6.28-numpy
+
 # Delete the tag on any remote before you push
 git push origin :refs/tags/v1.6.28-numpy
 
