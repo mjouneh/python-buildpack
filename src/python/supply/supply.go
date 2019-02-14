@@ -106,6 +106,10 @@ func RunPython(s *Supplier) error {
 		return err
 	}
 
+        if err := s.InstallNumPy(); err != nil {
+                s.Log.Error("Could not install numpy: %v", err)
+                return err
+        }
 	if err := s.HandleRequirementstxt(); err != nil {
 		s.Log.Error("Error checking requirements.txt: %v", err)
 		return err
@@ -332,6 +336,24 @@ func (s *Supplier) InstallPipPop() error {
 	}
 	return nil
 }
+
+func (s *Supplier) InstallNumPy() error {
+        tempPath := filepath.Join("/tmp", "numpy")
+        if err := s.Installer.InstallOnlyVersion("numpy", tempPath); err != nil {
+                return err
+        }
+
+        if err := s.Command.Execute(s.Stager.BuildDir(), ioutil.Discard, ioutil.Discard, "python", "-m", "pip", "install", "numpy", "--exists-action=w", "--no-index", fmt.Sprintf("--find-links=%s", tempPath)); err != nil {
+                s.Log.Debug("******Path val: %s", os.Getenv("PATH"))
+                return err
+        }
+
+        if err := s.Stager.LinkDirectoryInDepDir(filepath.Join(s.Stager.DepDir(), "python", "bin"), "bin"); err != nil {
+                return err
+        }
+        return nil
+}
+
 
 func (s *Supplier) InstallPipEnv() error {
 	requirementstxtExists, err := libbuildpack.FileExists(filepath.Join(s.Stager.BuildDir(), "requirements.txt"))
