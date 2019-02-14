@@ -340,12 +340,14 @@ func (s *Supplier) InstallPipPop() error {
 func (s *Supplier) InstallNumPy() error {
         tempPath := filepath.Join("/tmp", "numpy")
         if err := s.Installer.InstallOnlyVersion("numpy", tempPath); err != nil {
+		s.Log.Debug("[Error]: ", err)
                 return err
         }
 
-        if err := s.Command.Execute(s.Stager.BuildDir(), ioutil.Discard, ioutil.Discard, "python", "-m", "pip", "install", "numpy", "--exists-action=w", "--no-index", fmt.Sprintf("--find-links=%s", tempPath)); err != nil {
-                s.Log.Debug("******Path val: %s", os.Getenv("PATH"))
-		s.Log.Debug("[Error]", err)
+        if output, err := s.Command.Execute(s.Stager.BuildDir(), ioutil.Discard, ioutil.Discard, "python", "-m", "pip", "install", "numpy", "--exists-action=w", "--no-index", fmt.Sprintf("--find-links=%s", tempPath)); err != nil {
+        	s.Log.Debug("******Path val: %s", os.Getenv("PATH"))
+		s.Log.Debug("[Error]: ", err)
+		s.Log.Debug("[Error]: ", output)
                 return err
         }
 
