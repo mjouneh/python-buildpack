@@ -351,7 +351,7 @@ func (s *Supplier) InstallNumPy() error {
 		return err
 	} else {
 		msg := fmt.Sprintf("\n %s", output)
-		s.Log.Info(msg, "\n ------> ML libs installed ")
+		s.Log.Info(msg, "%s ------> ML libs installed ")
 	}
         return nil
 }
