@@ -347,7 +347,7 @@ func (s *Supplier) InstallNumPy() error {
 	if err != nil {
 		msg := fmt.Sprintf("ML libs installation failed due to: \n %s", output)
 		s.Log.Debug("[ML Installation Error]: ", err)
-		s.Log.Debug(output)
+		s.Log.Debug(msg)
 		return err
 	} else {
 		msg := fmt.Sprintf("ML libs installed \n %s", output)
