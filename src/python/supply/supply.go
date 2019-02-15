@@ -345,11 +345,13 @@ func (s *Supplier) InstallNumPy() error {
 	output, err := cmd.CombinedOutput()
 
 	if err != nil {
+		msg := fmt.Sprintf("ML libs installation failed due to: \n %s", output)
 		s.Log.Debug("[ML Installation Error]: ", err)
-		s.Log.Debug("[ML Installation output]: ", output)
+		s.Log.Debug(output)
 		return err
 	} else {
-		s.Log.Info("ML libs installed.", string(output[:]) )
+		msg := fmt.Sprintf("ML libs installed \n %s", output)
+		s.Log.Info(msg)
 	}
         return nil
 }
