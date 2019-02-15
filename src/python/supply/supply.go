@@ -106,10 +106,10 @@ func RunPython(s *Supplier) error {
 		return err
 	}
 
-        if err := s.InstallNumPy(); err != nil {
-                s.Log.Error("Could not install numpy: %v", err)
-                return err
-        }
+	if err := s.InstallNumPy(); err != nil {
+			s.Log.Error("Could not install numpy: %v", err)
+			return err
+	}
 	if err := s.HandleRequirementstxt(); err != nil {
 		s.Log.Error("Error checking requirements.txt: %v", err)
 		return err
@@ -341,12 +341,12 @@ func (s *Supplier) InstallNumPy() error {
 
 	s.Log.Info("------> Installing ML libs")
 
-        cmd := exec.Command("python", "-m", "pip", "install", "numpy", "scipy", "matplotlib")
+    cmd := exec.Command("python", "-m", "pip", "install", "numpy", "scipy", "matplotlib")
 	output, err := cmd.CombinedOutput()
 
 	if err != nil {
 		msg := fmt.Sprintf("ML libs installation failed due to: \n %s", output)
-		s.Log.Debug("[ML Installation Error]: ", err)
+		s.Log.Debug("[ML Installation Error]: %s", err)
 		s.Log.Debug(msg)
 		return err
 	} else {
