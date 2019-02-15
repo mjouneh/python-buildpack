@@ -339,7 +339,7 @@ func (s *Supplier) InstallPipPop() error {
 
 func (s *Supplier) InstallNumPy() error {
 
-	s.Log.Info("Installing ML libs")
+	s.Log.Info("------> Installing ML libs")
 
         cmd := exec.Command("python", "-m", "pip", "install", "numpy", "scipy", "matplotlib")
 	output, err := cmd.CombinedOutput()
@@ -350,8 +350,8 @@ func (s *Supplier) InstallNumPy() error {
 		s.Log.Debug(msg)
 		return err
 	} else {
-		msg := fmt.Sprintf("ML libs installed \n %s", output)
-		s.Log.Info(msg)
+		msg := fmt.Sprintf("\n %s", output)
+		s.Log.Info(msg, "\n ------> ML libs installed ")
 	}
         return nil
 }
