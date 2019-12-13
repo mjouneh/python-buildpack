@@ -9,3 +9,5 @@ require (
 	github.com/onsi/gomega v1.4.3
 	golang.org/x/crypto v0.0.0-20181203042331-505ab145d0a9
 )
+
+go 1.13
